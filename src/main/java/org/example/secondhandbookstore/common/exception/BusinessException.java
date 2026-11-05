@@ -6,11 +6,18 @@ import lombok.Getter;
 
 @Getter
 public class BusinessException extends RuntimeException {
-    private final int code;
+    private final ErrorCode errorCode;
 
-    public BusinessException(int code, String message) {
+    //使用枚举默认消息
+    public BusinessException(ErrorCode errorCode) {
+        super(errorCode.getDefaultMessage());
+        this.errorCode = errorCode;
+    }
+
+    //额外覆盖消息
+    public BusinessException(ErrorCode errorCode, String message) {
         super(message);
-        this.code = code;
+        this.errorCode = errorCode;
     }
 
 }

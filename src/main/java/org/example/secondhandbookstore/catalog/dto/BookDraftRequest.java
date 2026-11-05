@@ -6,7 +6,10 @@ import java.math.BigDecimal;
 
 public record BookDraftRequest(
         @NotBlank(message = "ISBN不能为空")
-        @Pattern(regexp = "^(?:\\d{10}|\\d{13})$", message = "ISBN必须是10位或13位数字")
+        @Pattern(
+                regexp = "^(?:\\d{9}[\\dXx]|\\d{13})$",
+                message = "ISBN必须是10位或13位，且ISBN-10末位只能是数字或X"
+        )
         String isbn,
 
         @NotBlank(message = "书名不能为空")
